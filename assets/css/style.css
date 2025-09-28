@@ -9,3 +9,68 @@
 a {
     text-decoration: none;
 }
+
+#video-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+video {
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5em;
+    text-transform: uppercase;
+    margin: 15px 0;
+    color: #e7e3e3;
+}
+
+p {
+    font-size: 2em;
+    color: #fff;
+}
+
+section {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    padding: 150px 200px;
+    background: #fff;
+}
+
+section h1 {
+    color: #000;
+}
+
+section p {
+    color: #000;
+}
+
+.sec2 {
+    background: transparent;
+}
+
+.sec2 h1 {
+    margin: 200px 0 0 0;
+    color: #fff;
+}
+
+.sec2 p {
+    color: #fff;
+}
