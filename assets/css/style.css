@@ -10,67 +10,276 @@ a {
     text-decoration: none;
 }
 
-#video-container {
-    width: 100%;
-    height: 100vh;
+body {
+    font-family: "Inter", sans-serif;
+    background: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* PARTICLES */
+#particles-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 🎥 VIDEO */
+.video-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
     overflow: hidden;
 }
 
-video {
-    min-width: 100%;
-    min-height: 100%;
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.25);
+    filter: brightness(0.6);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9));
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+/* 🌫 NAV */
+.nav {
     position: fixed;
     top: 0;
-    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 8%;
+    backdrop-filter: blur(20px);
+    z-index: 10;
+}
+
+.nav ul {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav li {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.nav li:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8%;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 7vw;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -3px;
+}
+
+.hero-sub {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.btn {
+    margin-top: 40px;
+    padding: 18px 48px;
+    border-radius: 50px;
+    max-width: 250px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #f3dbcc, #1c0116);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.btn:hover::before {
+    opacity: 0.2;
+}
+
+/* 💎 PROJECTS */
+.projects {
+    min-height: 100vh;
+    padding: 150px 8%;
+    display: flex;
+    gap: 60px;
+}
+
+/* PROJECTS */
+.projects {
+    min-height: 100vh;
+    padding: 150px 8%;
+    display: flex;
+    gap: 60px;
+}
+
+.project-card {
+    flex: 1;
+    height: 320px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 30px;
+
+    /* 🔥 EVENING SUNSET GRADIENT */
+    background: linear-gradient(45deg, #ff7a18, #ff3c38, #ff9a3c, #ff2e63);
+
+    background-size: 400% 400%;
+    animation: borderMove 8s ease infinite;
+
+    filter: blur(0.5px);
+    z-index: 0;
+}
+
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    border-radius: 40px;
+    background: radial-gradient(circle at center, rgba(255, 120, 40, 0.25), transparent 70%);
+    filter: blur(40px);
     z-index: -1;
 }
 
-.content {
+/* HEAT DISTORTION LAYER */
+.heat-wave {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: -10%;
+    z-index: 1;
+    pointer-events: none;
+
+    opacity: 0.5;
+
+    backdrop-filter: blur(12px) contrast(110%);
+    -webkit-backdrop-filter: blur(12px) contrast(110%);
+    mix-blend-mode: screen;
+
+    background: radial-gradient(circle at 30% 20%, rgba(255, 140, 60, 0.25), transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255, 80, 40, 0.25), transparent 40%),
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 120, 40, 0.08) 0px,
+            rgba(255, 120, 40, 0.08) 6px,
+            transparent 8px,
+            transparent 14px
+        );
+
+    animation: heatDistort 3s linear infinite;
+}
+
+@keyframes heatDistort {
+    0% {
+        transform: translateY(-20px) scaleY(1.1) skewX(2deg);
+    }
+    50% {
+        transform: translateY(20px) scaleY(1.2) skewX(-2deg);
+    }
+    100% {
+        transform: translateY(-20px) scaleY(1.1) skewX(2deg);
+    }
+}
+
+.card-inner {
+    position: absolute;
+    inset: 2px;
+
+    /* Warm dark glass instead of cold black */
+    background: linear-gradient(145deg, rgba(25, 8, 5, 0.85), rgba(40, 15, 8, 0.75));
+
+    backdrop-filter: blur(30px);
+    border-radius: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
+    z-index: 2;
+    transition: transform 0.2s ease;
+
+    /* Subtle inner glow */
+    box-shadow: inset 0 0 40px rgba(255, 120, 40, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes borderMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.project-card:hover .heat-wave {
+    opacity: 0.75;
+    backdrop-filter: blur(18px) contrast(120%);
+    animation-duration: 1.5s;
+    z-index: 5;
+}
+
+/* ABOUT */
+.about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20%;
     text-align: center;
 }
 
-h1 {
-    font-size: 3.5em;
-    text-transform: uppercase;
-    margin: 15px 0;
-    color: #e7e3e3;
-}
-
-p {
-    font-size: 2em;
-    color: #fff;
-}
-
-section {
-    text-align: center;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    padding: 150px 200px;
-    background: #fff;
-}
-
-section h1 {
-    color: #000;
-}
-
-section p {
-    color: #000;
-}
-
-.sec2 {
-    background: transparent;
-}
-
-.sec2 h1 {
-    margin: 200px 0 0 0;
-    color: #fff;
-}
-
-.sec2 p {
-    color: #fff;
+.about-title {
+    font-size: 4vw;
+    margin-bottom: 30px;
 }
